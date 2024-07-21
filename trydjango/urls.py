@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 from accounts import views as accounts_views
 from articles import views as articles_views
@@ -23,11 +23,12 @@ from articles import views as articles_views
 from .views import home_view
 
 urlpatterns = [
+    path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path('', home_view),
     path('articles/', articles_views.article_search_view),
     path('articles/create/', articles_views.article_create_view),
     path('articles/<int:id>/', articles_views.article_detail_view),
-    path('admin/', admin.site.urls),
+    path('theboss/', admin.site.urls), # admin
     path('register/', accounts_views.register_view),
     path('login/', accounts_views.login_view),
     path('logout/', accounts_views.logout_view),
