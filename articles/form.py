@@ -4,8 +4,8 @@ from .models import Article
 class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ['title', 'content']
-    
+        fields = ['title', 'content', 'image']
+
     def clean(self):
         data = self.cleaned_data
         title = data.get('title')

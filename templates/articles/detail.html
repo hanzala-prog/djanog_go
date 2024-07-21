@@ -2,6 +2,13 @@
 
 {% block content %}
 
+<!-- detail.html -->
+
+{% if object.image %}
+    <img src="{{ object.image.url }}" alt="{{ object.title }}">
+{% else %}
+    <p>No image available</p>
+{% endif %}
 <h1>{{ object.title }}</h1>
 <p>{{ object.content }}</p>
 

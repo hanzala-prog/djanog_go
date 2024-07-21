@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
 
 from accounts import views as accounts_views
 from articles import views as articles_views
@@ -26,10 +28,11 @@ urlpatterns = [
     path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path('', home_view),
     path('articles/', articles_views.article_search_view),
-    path('articles/create/', articles_views.article_create_view),
-    path('articles/<int:id>/', articles_views.article_detail_view),
+    path('articles/create/', articles_views.article_create_view, name='article_create'),
+    path('articles/<int:id>/', articles_views.article_detail_view, name='article_detail'),
     path('theboss/', admin.site.urls), # admin
     path('register/', accounts_views.register_view),
     path('login/', accounts_views.login_view),
     path('logout/', accounts_views.logout_view),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
